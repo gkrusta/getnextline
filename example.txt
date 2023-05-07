@@ -1,3 +1,2 @@
 1234
-abcd
-5678
+aaaaaaaaa\n
