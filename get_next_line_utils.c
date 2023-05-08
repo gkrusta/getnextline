@@ -6,21 +6,71 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:50:59 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/07 19:26:30 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/08 18:12:25 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_line_len(char *str)
+void	*ft_calloc(size_t num, size_t size)
+{
+	char			*ptr;
+	unsigned int	i;
+
+	i = 0;
+	ptr = malloc(num * size);
+	{
+		if (!ptr)
+			return (NULL);
+		while (i < num * size)
+		{
+			ptr[i] = 0;
+			i++;
+		}
+	}
+	return (ptr);
+}
+
+int	ft_strchr(const char *str, int c)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
 		i++;
-	i++;
-	return (i);
+	}
+	return (0);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str3;
+	int		i;
+	int		j;
+	size_t	len;
+
+	i = 0;
+	j = 0;
+	len = (ft_strlen((char *)s1) + ft_strlen((char *)s2));
+	str3 = malloc(sizeof(char) * (len + 1));
+	if (!str3)
+		return (NULL);
+	while (s1[i])
+	{
+		str3[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		str3[i] = s2[j];
+		i++;
+		j++;
+	}
+	str3[i] = '\0';
+	return (str3);
 }
 
 size_t	ft_strlen(const char *str)
@@ -33,21 +83,14 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+/* int	ft_line_len(char *str)
 {
-	unsigned char	*ptr1;
-	unsigned char	*ptr2;
-	size_t			i;
+	int	i;
 
-	ptr1 = (unsigned char *)dst;
-	ptr2 = (unsigned char *)src;
 	i = 0;
-	if (!dst && !src)
-		return (0);
-	while (i < n)
-	{
-		ptr1[i] = ptr2[i];
+	while (str[i] && str[i] != '\n')
 		i++;
-	}
-	return (dst);
+	i++;
+	return (i);
 }
+ */
