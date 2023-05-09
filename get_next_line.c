@@ -6,7 +6,7 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:15:07 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/09 12:08:50 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/09 12:57:31 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,27 @@ char	*ft_concat_free(char *str_ac, char *temp)
 	return (joined_str);
 }
 
-char	*get_next_line(int fd)
+char	*ft_get_line(char *str_ac)
+{
+	char	*line;
+	size_t	i;
+	size_t	len;
+
+	i = 0;
+	len = ft_line_len(str_ac) + 2; // 2 for the \n
+	if (!len)
+		return (NULL);
+	line = ft_calloc(len, sizeof(char));
+	while (str_ac[i] && str_ac[i] != '\n')
+	{
+		line[i] = str_ac[i];
+		i++;
+	}
+	line[i++] = '\n';
+	return (line);
+}
+
+/* char	*get_next_line(int fd)
 {
 	static char	*str_ac;
 	char		*line;
@@ -70,4 +90,4 @@ char	*get_next_line(int fd)
 		return (NULL);
 	str_ac = ft_find_char(fd, str_ac);
 	line = ft_alloc_line();
-}
+} */

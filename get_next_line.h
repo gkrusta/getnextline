@@ -6,7 +6,7 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:00:34 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/08 18:03:58 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/09 12:57:13 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	*ft_calloc(size_t num, size_t size);
 int		ft_strchr(const char *str, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
+int		ft_line_len(char *str);
 
 /* get_next_line file functions */
 char	*ft_find_char(int fd, char *str_ac);
 char	*ft_concat_free(char *str_ac, char *temp);
+char	*ft_get_line(char *str_ac);
 
 #endif
