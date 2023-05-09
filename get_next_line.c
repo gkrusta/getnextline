@@ -6,7 +6,7 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:15:07 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/09 13:47:50 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/09 15:36:46 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,14 @@ char	*ft_get_line(char *str_ac)
 	return (line);
 }
 
+char	*ft_clear_str_ac(char *str_ac)
+{
+	int	i;
+
+	i = 0;
+	while ()
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*str_ac = NULL;
@@ -90,5 +98,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	str_ac = ft_find_char(fd, str_ac);
 	line = ft_get_line(str_ac);
+	str_ac = ft_clear_str_ac(str_ac);
 	return (line);
 }
