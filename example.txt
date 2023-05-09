@@ -1,2 +1,2 @@
-1234567
-aaaaaaaaa\n
+1234
+aaaaaaaaa
