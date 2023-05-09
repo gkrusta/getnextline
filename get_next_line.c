@@ -6,7 +6,7 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:15:07 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/09 15:36:46 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:59:29 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,55 @@ char	*ft_get_line(char *str_ac)
 	return (line);
 }
 
-char	*ft_clear_str_ac(char *str_ac)
+/* char	*ft_clear_memory(char *str_ac)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
+	char	*new_line;
 
 	i = 0;
-	while ()
+	while (str_ac[i] != '\0' && str_ac[i] != '\n')
+		i++;
+	if (str_ac[i] == '\0')
+	{
+		free(str_ac);
+		return (NULL);
+	}
+	new_line = ft_calloc(ft_strlen(str_ac) - i + 1, sizeof(char));
+	i++;
+	j = 0;
+	while (str_ac[i] != '\0')
+		new_line[j++] = str_ac[i++];
+	free(str_ac);
+	if (new_line[0] == '\0')
+	{
+		free(new_line);
+		return (NULL);
+	}
+	return (new_line);
+} */
+
+char	*ft_clear_memory(char *str_ac)
+{
+	size_t	i;
+	size_t	j;
+	char	*new_line;
+
+	i = 0;
+	j = 0;
+	while (str_ac[i] != '\n' && str_ac[i])
+		i++;
+	if (str_ac[0] == '\0')
+	{
+		free(str_ac);
+		return (NULL);
+	}
+	new_line = ft_calloc(ft_strlen(str_ac) - i + 1, sizeof(char));
+	i++;
+	while (str_ac[i] != '\0')
+		new_line[j++] = str_ac[i++];
+	free(str_ac);
+	return (new_line);
 }
 
 char	*get_next_line(int fd)
@@ -98,6 +141,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	str_ac = ft_find_char(fd, str_ac);
 	line = ft_get_line(str_ac);
-	str_ac = ft_clear_str_ac(str_ac);
+	str_ac = ft_clear_memory(str_ac);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:00:34 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/09 15:37:16 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:52:52 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 2
 # endif
 
 # include <stdlib.h>
@@ -33,5 +33,6 @@ char	*get_next_line(int fd);
 char	*ft_find_char(int fd, char *str_ac);
 char	*ft_concat_free(char *str_ac, char *temp);
 char	*ft_get_line(char *str_ac);
+char	*ft_clear_memory(char *str_ac);
 
 #endif
