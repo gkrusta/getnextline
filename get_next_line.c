@@ -6,7 +6,7 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:15:07 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/09 19:59:29 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/10 19:04:55 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,29 @@ char	*ft_concat_free(char *str_ac, char *temp)
 	return (joined_str);
 }
 
-char	*ft_get_line(char *str_ac)
+char	*ft_get_line(char	*str_ac)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	if (str_ac[i] == '\0') 
+		return (NULL); //si lo que me entra es un nulo es que ya he acabado
+	while (str_ac[i] != '\n' && str_ac[i] != '\0')
+		i++;
+	line = ft_calloc((i + 2), sizeof(char));
+	i = 0;
+	while (str_ac[i] != '\n' && str_ac[i] != '\0')
+	{
+		line[i] = str_ac[i];
+		i++;
+	}
+	if (str_ac[i] != '\0' && str_ac[i] == '\n') //si no estoy al final del documento
+		line[i++] = '\n'; //escribo una nueva línea después
+	return (line);
+}
+
+/* char	*ft_get_line(char *str_ac)
 {
 	char	*line;
 	size_t	i;
@@ -72,41 +94,14 @@ char	*ft_get_line(char *str_ac)
 	if (!len)
 		return (NULL);
 	line = ft_calloc(len, sizeof(char));
-	while (str_ac[i] && str_ac[i] != '\n')
+	while (str_ac[i] != '\0' && str_ac[i] != '\n')
 	{
 		line[i] = str_ac[i];
 		i++;
 	}
-	line[i++] = '\n';
+	if (str_ac[i] != '\0' && str_ac[i] == '\n')
+		line[i++] = '\n';
 	return (line);
-}
-
-/* char	*ft_clear_memory(char *str_ac)
-{
-	size_t	i;
-	size_t	j;
-	char	*new_line;
-
-	i = 0;
-	while (str_ac[i] != '\0' && str_ac[i] != '\n')
-		i++;
-	if (str_ac[i] == '\0')
-	{
-		free(str_ac);
-		return (NULL);
-	}
-	new_line = ft_calloc(ft_strlen(str_ac) - i + 1, sizeof(char));
-	i++;
-	j = 0;
-	while (str_ac[i] != '\0')
-		new_line[j++] = str_ac[i++];
-	free(str_ac);
-	if (new_line[0] == '\0')
-	{
-		free(new_line);
-		return (NULL);
-	}
-	return (new_line);
 } */
 
 char	*ft_clear_memory(char *str_ac)
@@ -119,7 +114,7 @@ char	*ft_clear_memory(char *str_ac)
 	j = 0;
 	while (str_ac[i] != '\n' && str_ac[i])
 		i++;
-	if (str_ac[0] == '\0')
+	if (str_ac[i] == '\0')
 	{
 		free(str_ac);
 		return (NULL);
@@ -129,16 +124,30 @@ char	*ft_clear_memory(char *str_ac)
 	while (str_ac[i] != '\0')
 		new_line[j++] = str_ac[i++];
 	free(str_ac);
+	if (new_line[0] == '\0')
+	{
+		free(new_line);
+		return (NULL);
+	}
 	return (new_line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*str_ac = NULL;
+	static char	*str_ac;
 	char		*line;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
+	if (read(fd, 0, 0) == -1)
+	{
+		if (str_ac != NULL)
+		{
+			free(str_ac);
+			str_ac = NULL;
+		}
+		return (NULL);
+	}
 	str_ac = ft_find_char(fd, str_ac);
 	line = ft_get_line(str_ac);
 	str_ac = ft_clear_memory(str_ac);
