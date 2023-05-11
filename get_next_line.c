@@ -6,7 +6,7 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:15:07 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/11 15:25:54 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/11 16:41:28 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_find_char(int fd, char *str_ac)
 	char	*temp;
 	int		read_return;
 
-	if (!str_ac) // for the 1st time of the function call
+	if (!str_ac)
 		str_ac = ft_calloc(1, sizeof(char));
 	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	read_return = 1;
@@ -47,28 +47,6 @@ char	*ft_concat_free(char *str_ac, char *temp)
 	return (joined_str);
 }
 
-/* char	*ft_get_line(char	*str_ac)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	if (str_ac[i] == '\0')
-		return (NULL);
-	while (str_ac[i] != '\n' && str_ac[i] != '\0')
-		i++;
-	line = ft_calloc((i + 2), sizeof(char));
-	i = 0;
-	while (str_ac[i] != '\n' && str_ac[i] != '\0')
-	{
-		line[i] = str_ac[i];
-		i++;
-	}
-	if (str_ac[i] != '\0' && str_ac[i] == '\n')
-		line[i++] = '\n';
-	return (line);
-} */
-
 char	*ft_get_line(char *str_ac)
 {
 	char	*line;
@@ -76,7 +54,9 @@ char	*ft_get_line(char *str_ac)
 	size_t	len;
 
 	i = 0;
-	len = ft_line_len(str_ac) + 2; // 2 for the \n
+	if (str_ac[i] == '\0')
+		return (NULL);
+	len = ft_line_len(str_ac) + 1;
 	if (!len)
 		return (NULL);
 	line = ft_calloc(len, sizeof(char));
