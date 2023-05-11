@@ -6,25 +6,11 @@
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:15:07 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/10 19:04:55 by gkrusta          ###   ########.fr       */
+/*   Updated: 2023/05/11 15:25:54 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-//store memory
-//to give memory for a line (char *memory)
-/* {
-	char	*line; // new line
-	int		lenght;
-	int		i;
-
-	lenght = ft_line_len(memory);
-	if (!lenght)
-		return (NULL);
-	line = malloc(sizeof(char) * lenght + 1);
-	return (line);
-} */
 
 char	*ft_find_char(int fd, char *str_ac)
 {
@@ -61,14 +47,14 @@ char	*ft_concat_free(char *str_ac, char *temp)
 	return (joined_str);
 }
 
-char	*ft_get_line(char	*str_ac)
+/* char	*ft_get_line(char	*str_ac)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	if (str_ac[i] == '\0') 
-		return (NULL); //si lo que me entra es un nulo es que ya he acabado
+	if (str_ac[i] == '\0')
+		return (NULL);
 	while (str_ac[i] != '\n' && str_ac[i] != '\0')
 		i++;
 	line = ft_calloc((i + 2), sizeof(char));
@@ -78,12 +64,12 @@ char	*ft_get_line(char	*str_ac)
 		line[i] = str_ac[i];
 		i++;
 	}
-	if (str_ac[i] != '\0' && str_ac[i] == '\n') //si no estoy al final del documento
-		line[i++] = '\n'; //escribo una nueva línea después
+	if (str_ac[i] != '\0' && str_ac[i] == '\n')
+		line[i++] = '\n';
 	return (line);
-}
+} */
 
-/* char	*ft_get_line(char *str_ac)
+char	*ft_get_line(char *str_ac)
 {
 	char	*line;
 	size_t	i;
@@ -102,7 +88,7 @@ char	*ft_get_line(char	*str_ac)
 	if (str_ac[i] != '\0' && str_ac[i] == '\n')
 		line[i++] = '\n';
 	return (line);
-} */
+}
 
 char	*ft_clear_memory(char *str_ac)
 {
