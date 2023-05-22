@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkrusta <gkrusta@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 19:15:07 by gkrusta           #+#    #+#             */
-/*   Updated: 2023/05/22 13:56:47 by gkrusta          ###   ########.fr       */
+/*   Created: 2023/05/22 11:31:10 by gkrusta           #+#    #+#             */
+/*   Updated: 2023/05/22 13:56:38 by gkrusta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_find_char(int fd, char *str_ac)
 {
@@ -100,22 +100,22 @@ char	*ft_clear_memory(char *str_ac)
 
 char	*get_next_line(int fd)
 {
-	static char	*str_ac;
+	static char	*str_ac[1024];
 	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= 1024)
 		return (NULL);
 	if (read(fd, 0, 0) == -1)
 	{
-		if (str_ac != NULL)
+		if (str_ac[fd] != NULL)
 		{
-			free(str_ac);
-			str_ac = NULL;
+			free(str_ac[fd]);
+			str_ac[fd] = NULL;
 		}
 		return (NULL);
 	}
-	str_ac = ft_find_char(fd, str_ac);
-	line = ft_get_line(str_ac);
-	str_ac = ft_clear_memory(str_ac);
+	str_ac[fd] = ft_find_char(fd, str_ac[fd]);
+	line = ft_get_line(str_ac[fd]);
+	str_ac[fd] = ft_clear_memory(str_ac[fd]);
 	return (line);
 }
